@@ -114,6 +114,11 @@
   :ensure t
   :bind (("C-x g" . magit-status)))
 
+;; evil
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode 1))
 
 (provide 'init-third-packages)
 
