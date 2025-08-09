@@ -20,10 +20,11 @@
   (add-to-list 'default-frame-alist '(width . 120))
   (add-to-list 'default-frame-alist '(height . 40)))
 
+
 ;; pre-settings
 (add-to-list 'load-path (concat user-emacs-directory "lisp"))
 (add-to-list 'load-path (concat user-emacs-directory "site-lisp/maple-translate"))
-(setq-default flymake-mode nil) ; 禁用flymake
+;(setq-default flymake-mode nil) ; 禁用flymake
 
 
 ;; customized functions
@@ -45,5 +46,5 @@
 ;;; init.el ends here
 ;;; Local Variables:
 ;; coding: utf-8
-;; byte-compile-warnings: (not unresolved obsolete)
+;; byte-compile-warnings: (not unresolved obsolete free-vars)
 ;; End:

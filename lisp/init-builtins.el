@@ -135,10 +135,10 @@
 (add-hook 'prog-mode-hook 'which-function-mode)
 
 ;; Flymake
-;(use-package flymake
-;  :hook (prog-mode . flymake-mode)
-;  :bind (("M-n" . #'flymake-goto-next-error)
-;	 ("M-p" . #'flymake-goto-prev-error)))
+(use-package flymake
+  :hook (prog-mode . flymake-mode)
+  :bind (("M-n" . #'flymake-goto-next-error)
+	 ("M-p" . #'flymake-goto-prev-error)))
 
 
 ;; Language Server (eglot - builtin since v29)
@@ -209,10 +209,17 @@
 ;; diff-hl
 (use-package diff-hl
   :ensure t
-  :hook ((prog-mode . diff-hl-mode)
-         (vc-dir-mode . diff-hl-dir-mode))
+  :hook ((prog-mode . diff-hl-mode)        ;; 编程模式启用
+         (text-mode . diff-hl-mode)        ;; 文本模式启用
+       ; (vc-dir-mode . diff-hl-dir-mode)  ;; vc-dir 启用
+         (dired-mode . diff-hl-dired-mode) ;; dired 显示状态
+         (magit-post-refresh . diff-hl-magit-post-refresh))
   :config
-  (global-diff-hl-mode))
+  ;; 滚动时更新高亮
+  (diff-hl-flydiff-mode 1)
+  ;; 支持在 fringe（边栏）上显示
+  (setq diff-hl-draw-borders nil))
+
 
 (provide 'init-builtins)
 

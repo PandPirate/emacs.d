@@ -101,13 +101,19 @@
           ("lazyworm-ce" . "stardict-lazyworm-ce-2.4.2"))))
 
 ;; flycheck
-(use-package flycheck
-  :ensure t  ;; 手动下载就改成 :ensure nil，并且加 load-path
-  :init
-  (global-flycheck-mode)
-  :config
-  (setq byte-compile-warnings '(not free-vars))  ;(not free-vars) 表示除了未使用变量，其它警告都保留
-  )
+;(use-package flycheck
+;  :ensure t  ;; 手动下载就改成 :ensure nil，并且加 load-path
+;  :init
+;  (global-flycheck-mode)
+;  :config
+;  (setq byte-compile-warnings '(not free-vars))  ;(not free-vars) 表示除了未使用变量，其它警告都保留
+;  )
+
+;; magit
+(use-package magit
+  :ensure t
+  :bind (("C-x g" . magit-status)))
+
 
 (provide 'init-third-packages)
 
