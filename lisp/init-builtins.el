@@ -81,7 +81,9 @@
 ;; `fido-mode' is provided by icomplete.el
 (use-package icomplete
   :hook (after-init . fido-mode)
-  :config (setq completions-detailed t))
+  :config
+  (setq completions-detailed t)
+  (fido-vertical-mode t))
 
 ;; Highlight Current Line
 (use-package hl-line
@@ -133,10 +135,10 @@
 (add-hook 'prog-mode-hook 'which-function-mode)
 
 ;; Flymake
-(use-package flymake
-  :hook (prog-mode . flymake-mode)
-  :bind (("M-n" . #'flymake-goto-next-error)
-	 ("M-p" . #'flymake-goto-prev-error)))
+;(use-package flymake
+;  :hook (prog-mode . flymake-mode)
+;  :bind (("M-n" . #'flymake-goto-next-error)
+;	 ("M-p" . #'flymake-goto-prev-error)))
 
 
 ;; Language Server (eglot - builtin since v29)
@@ -203,6 +205,14 @@
 	  (yaml       . ("https://github.com/ikatyang/tree-sitter-yaml"))
 	  (toml       . ("https://github.com/tree-sitter/tree-sitter-toml"))
 	  (zig        . ("https://github.com/GrayJack/tree-sitter-zig")))))
+
+;; diff-hl
+(use-package diff-hl
+  :ensure t
+  :hook ((prog-mode . diff-hl-mode)
+         (vc-dir-mode . diff-hl-dir-mode))
+  :config
+  (global-diff-hl-mode))
 
 (provide 'init-builtins)
 

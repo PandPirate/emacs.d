@@ -60,13 +60,54 @@
 (use-package quickrun
   :ensure t
   :commands (quickrun quickrun-region))
-  ;;:when (derived-mode-p 'prog-mode))
+;;:when (derived-mode-p 'prog-mode))
 
 ;; HTTP Request
 (use-package restclient
   :ensure t
   :mode (("\\.http\\'" . restclient-mode)))
 
+;; project
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :config
+  (setq projectile-project-search-path '("~/projects/"))
+  (setq projectile-completion-system 'auto))
+
+;; translate
+(use-package maple-translate
+  :ensure nil
+  :commands (maple-translate maple-translate+)
+  :bind ("C-x q" . maple-translate)
+  :config
+  (setq maple-translate-engine 'youdao)
+  ;; or use multi engines
+  (setq maple-translate-engine '(youdao dictcn))
+  ;; custom result with different section
+  (setq maple-translate-section '(phonetic basic detail morphology phrase sentence))
+  ;; with google translate
+  (setq maple-translate-google-url "https://translate.googleapis.com/translate_a/single")
+  (setq maple-translate-google-proxies
+	'(("http" . "127.0.0.1:1086")
+          ("https" . "127.0.0.1:1086")))
+  ;; with offline sdcv
+  (setq maple-translate-sdcv-dir "~/.emacs.d/.stardict/dicts")
+  (setq maple-translate-sdcv-dicts
+	'(("lazyworm-ec" . "stardict-lazyworm-ec-2.4.2")
+          ("lazyworm-ce" . "stardict-lazyworm-ce-2.4.2"))))
+
+;; flycheck
+(use-package flycheck
+  :ensure t  ;; 手动下载就改成 :ensure nil，并且加 load-path
+  :init
+  (global-flycheck-mode)
+  :config
+  (setq byte-compile-warnings '(not free-vars))  ;(not free-vars) 表示除了未使用变量，其它警告都保留
+  )
 
 (provide 'init-third-packages)
 
